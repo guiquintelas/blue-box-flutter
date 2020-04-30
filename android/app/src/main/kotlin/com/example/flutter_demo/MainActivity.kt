@@ -1,4 +1,4 @@
-package com.example.flutter_demo
+package com.example.blue_box_flutter
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
