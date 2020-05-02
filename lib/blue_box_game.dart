@@ -18,7 +18,7 @@ class BlueBoxGame extends BaseGame with PanDetector {
 
     for (var component in this.components) {
       if (component is PanDetector) {
-        component.onPanUpdate(details);
+        (component as PanDetector).onPanUpdate(details);
       }
     }
   }
