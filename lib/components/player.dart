@@ -10,13 +10,12 @@ class Player extends PositionComponent with PanDetector {
   Size screenSize;
 
   Player() {
-    this.size = 30;
+    size = 30;
   }
 
   @override
   void render(Canvas c) {
-    c.drawRect(Rect.fromLTWH(this.x, this.y, this.size, this.size),
-        Palette.blue.paint);
+    c.drawRect(Rect.fromLTWH(x, y, size, size), Palette.blue.paint);
   }
 
   @override
@@ -25,13 +24,13 @@ class Player extends PositionComponent with PanDetector {
   void resize(Size size) {
     super.resize(size);
     screenSize = size;
-    this.x = screenSize.bottomCenter(Offset.zero).dx;
-    this.y = screenSize.bottomCenter(Offset(0, -150)).dy;
+    x = screenSize.bottomCenter(Offset.zero).dx;
+    y = screenSize.bottomCenter(Offset(0, -150)).dy;
   }
 
   @override
   void onPanUpdate(DragUpdateDetails details) {
     super.onPanUpdate(details);
-    this.x = details.globalPosition.dx;
+    x = details.globalPosition.dx;
   }
 }
