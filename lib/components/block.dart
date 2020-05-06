@@ -6,13 +6,12 @@ import 'package:flame/components/component.dart';
 
 import '../palette.dart';
 
-class Block extends PositionComponent {
-  double size;
-  double speed;
+class Block extends Component {
+  double x, y, size, speed;
+  Paint paint = Palette.white.paint;
   BlueBoxGame game;
 
-  Block(this.game) {
-    size = 20;
+  Block(this.game, this.size) {
     x = Random().nextDouble() * (game.screenSize.width - size);
     y = -size;
     speed = 2 + Random().nextDouble() * 5;
@@ -20,22 +19,22 @@ class Block extends PositionComponent {
 
   @override
   void render(Canvas c) {
-    c.drawRect(Rect.fromLTWH(x, y, size, size), Palette.white.paint);
+    c.drawRect(Rect.fromLTWH(x, y, size, size), paint);
   }
 
   @override
   void update(double t) {
-    fall();
-    checkAlive();
+    _fall();
+    _checkAlive();
   }
 
-  void fall() {
+  void _fall() {
     y += speed;
   }
 
-  void checkAlive() {
+  void _checkAlive() {
     if (y >= game.screenSize.height) {
-      game.components.remove(this);
+      game.remove(this);
     }
   }
 }
