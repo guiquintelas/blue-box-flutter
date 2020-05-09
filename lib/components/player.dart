@@ -5,10 +5,10 @@ import 'package:blue_box_flutter/palette.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/gestures.dart';
 
-class Player extends PositionComponent with PanDetector {
-  double size;
+class Player extends Component with PanDetector {
   Size screenSize;
 
+  double x, y, size = 30;
   int life = 1;
 
   @override
@@ -30,5 +30,9 @@ class Player extends PositionComponent with PanDetector {
   void onPanUpdate(DragUpdateDetails details) {
     super.onPanUpdate(details);
     x = details.globalPosition.dx;
+  }
+
+  Rect toRect() {
+    return Rect.fromLTWH(x, y, size, size);
   }
 }
