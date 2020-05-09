@@ -7,4 +7,10 @@ class LifeBlock extends Block {
   LifeBlock(BlueBoxGame game) : super(game, 23) {
     paint = Palette.green.paint;
   }
+
+  @override
+  void onPlayerColision() {
+    game.player.life++;
+    game.remove(this);
+  }
 }

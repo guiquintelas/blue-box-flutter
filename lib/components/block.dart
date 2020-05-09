@@ -6,7 +6,7 @@ import 'package:flame/components/component.dart';
 
 import '../palette.dart';
 
-class Block extends Component {
+abstract class Block extends Component {
   double x, y, size, speed;
   Paint paint = Palette.white.paint;
   BlueBoxGame game;
@@ -26,6 +26,7 @@ class Block extends Component {
   void update(double t) {
     _fall();
     _checkAlive();
+    _checkForPlayerColision();
   }
 
   void _fall() {
@@ -37,4 +38,15 @@ class Block extends Component {
       game.remove(this);
     }
   }
+
+  void _checkForPlayerColision() {
+    Rect blockRect = Rect.fromLTWH(x, y, size, size);
+    Rect playerRect = game.player.toRect();
+
+    if (blockRect.overlaps(playerRect)) {
+      onPlayerColision();
+    }
+  }
+
+  void onPlayerColision();
 }
