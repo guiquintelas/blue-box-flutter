@@ -9,9 +9,7 @@ class Player extends PositionComponent with PanDetector {
   double size;
   Size screenSize;
 
-  Player() {
-    size = 30;
-  }
+  int life = 1;
 
   @override
   void render(Canvas c) {

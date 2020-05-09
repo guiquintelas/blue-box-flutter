@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:blue_box_flutter/components/enemy_block.dart';
 import 'package:blue_box_flutter/components/life_block.dart';
+import 'package:blue_box_flutter/components/text_util.dart';
 import 'package:blue_box_flutter/my_base_game.dart';
 
 class BlueBoxGame extends MyBaseGame {
@@ -26,5 +27,7 @@ class BlueBoxGame extends MyBaseGame {
   }
 
   @override
-  void renderGame(Canvas canvas) {}
+  void renderGame(Canvas canvas) {
+    TextUtil.drawText(canvas, "Life: ${player.life}", Offset(100, 10));
+  }
 }
