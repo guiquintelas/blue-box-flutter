@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'components/player.dart';
 import 'components/text_util.dart';
 
-class MyBaseGame extends BaseGame with PanDetector {
+abstract class MyBaseGame extends BaseGame with PanDetector {
   Player player;
   Size screenSize;
   bool isInit = false;
@@ -74,6 +74,7 @@ class MyBaseGame extends BaseGame with PanDetector {
     if (!isInit) return;
 
     _removeComponentsWaiting();
+    updateGame(t);
     super.update(t);
   }
 
@@ -81,8 +82,13 @@ class MyBaseGame extends BaseGame with PanDetector {
   void render(Canvas canvas) {
     super.render(canvas);
 
+    renderGame(canvas);
+
     if (debugMode()) {
       _renderFPS(canvas);
     }
   }
+
+  void updateGame(double t);
+  void renderGame(Canvas canvas);
 }

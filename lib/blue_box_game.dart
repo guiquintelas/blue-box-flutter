@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:blue_box_flutter/components/enemy_block.dart';
 import 'package:blue_box_flutter/components/life_block.dart';
 import 'package:blue_box_flutter/my_base_game.dart';
@@ -6,8 +8,7 @@ class BlueBoxGame extends MyBaseGame {
   bool debugMode() => true;
 
   @override
-  void update(double t) {
-    super.update(t);
+  void updateGame(double t) {
     addEnemyBlock();
     addLifeBlock();
   }
@@ -23,4 +24,7 @@ class BlueBoxGame extends MyBaseGame {
       add(LifeBlock(this));
     }
   }
+
+  @override
+  void renderGame(Canvas canvas) {}
 }
