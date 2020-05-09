@@ -13,17 +13,8 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
   Size screenSize;
   bool isInit = false;
 
-  List<Component> _componentsToRemove = [];
-
   void remove(Component component) {
-    _componentsToRemove.add(component);
-  }
-
-  void _removeComponentsWaiting() {
-    _componentsToRemove.forEach((element) {
-      components.remove(element);
-    });
-    _componentsToRemove.clear();
+    components.remove(component);
   }
 
   void _renderFPS(Canvas canvas) {
@@ -73,7 +64,6 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
   void update(double t) {
     if (!isInit) return;
 
-    _removeComponentsWaiting();
     updateGame(t);
     super.update(t);
   }
