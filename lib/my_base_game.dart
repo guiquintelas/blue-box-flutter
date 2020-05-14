@@ -9,38 +9,10 @@ import 'components/text_util.dart';
 
 abstract class MyBaseGame extends BaseGame with PanDetector {
   Player player;
-  Size screenSize;
   bool isInit = false;
-
-  void _renderFPS(Canvas canvas) {
-    TextUtil.drawText(
-        canvas, "FPS: ${fps().toStringAsFixed(0)}", Offset(10, 10));
-  }
-
-  int componentCount<T>() {
-    int count = 0;
-
-    components.forEach((component) {
-      if (component is T) {
-        count++;
-      }
-    });
-
-    return count;
-  }
-
-  void resize(Size size) {
-    super.resize(size);
-    screenSize = size;
-
-    init();
-    isInit = true;
-  }
 
   @override
   void onPanUpdate(DragUpdateDetails details) {
-    if (!isInit) return;
-
     super.onPanUpdate(details);
 
     for (var component in this.components) {
@@ -50,12 +22,24 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     }
   }
 
-  void init() {
-    add(player = Player());
+  @override
+  void resize(Size size) {
+    Size beforeSize = this.size;
+    super.resize(size);
+
+    if (beforeSize == null && this.size != null) {
+      isInit = true;
+      this.init();
+    }
   }
 
   void dispose() {
     components.clear();
+  }
+
+  void restart() {
+    dispose();
+    init();
   }
 
   @override
@@ -68,8 +52,9 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
 
   @override
   void render(Canvas canvas) {
-    super.render(canvas);
+    if (!isInit) return;
 
+    super.render(canvas);
     renderGame(canvas);
 
     if (debugMode()) {
@@ -77,7 +62,24 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     }
   }
 
-  void restart() {}
+  void _renderFPS(Canvas canvas) {
+    TextUtil.drawText(
+        canvas, "FPS: ${fps().toStringAsFixed(0)}", Offset(10, 10));
+  }
+
+  void init() {}
   void updateGame(double t);
   void renderGame(Canvas canvas);
+
+  int componentCount<T>() {
+    int count = 0;
+
+    components.forEach((component) {
+      if (component is T) {
+        count++;
+      }
+    });
+
+    return count;
+  }
 }

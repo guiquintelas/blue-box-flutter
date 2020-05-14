@@ -5,8 +5,15 @@ import 'package:blue_box_flutter/components/life_block.dart';
 import 'package:blue_box_flutter/components/text_util.dart';
 import 'package:blue_box_flutter/my_base_game.dart';
 
+import 'components/player.dart';
+
 class BlueBoxGame extends MyBaseGame {
   bool debugMode() => true;
+
+  @override
+  void init() {
+    add(player = Player());
+  }
 
   @override
   void updateGame(double t) {
