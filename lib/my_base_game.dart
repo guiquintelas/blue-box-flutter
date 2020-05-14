@@ -60,6 +60,10 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     add(player = Player());
   }
 
+  void dispose() {
+    components.clear();
+  }
+
   @override
   void update(double t) {
     if (!isInit) return;
@@ -79,6 +83,7 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     }
   }
 
+  void restart() {}
   void updateGame(double t);
   void renderGame(Canvas canvas);
 }
