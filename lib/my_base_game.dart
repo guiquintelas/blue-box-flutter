@@ -47,7 +47,6 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     if (!isInit) return;
 
     super.onPanUpdate(details);
-    this.player.onPanUpdate(details);
 
     for (var component in this.components) {
       if (component is PanDetector) {
