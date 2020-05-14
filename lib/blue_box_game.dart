@@ -1,8 +1,6 @@
 import 'dart:ui';
 
-import 'package:blue_box_flutter/components/enemy_block.dart';
-import 'package:blue_box_flutter/components/life_block.dart';
-import 'package:blue_box_flutter/components/text_util.dart';
+import 'package:blue_box_flutter/gui/life_bar.dart';
 import 'package:blue_box_flutter/my_base_game.dart';
 
 import 'game_objects/enemy_block.dart';
@@ -16,6 +14,7 @@ class BlueBoxGame extends MyBaseGame {
   @override
   void init() {
     add(player = Player());
+    add(LifeBar());
   }
 
   @override
