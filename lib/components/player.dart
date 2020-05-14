@@ -35,4 +35,12 @@ class Player extends Component with PanDetector {
   Rect toRect() {
     return Rect.fromLTWH(x, y, size, size);
   }
+
+  bool destroy() {
+    if (life <= 0) {
+      return true;
+    }
+
+    return false;
+  }
 }

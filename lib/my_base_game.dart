@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flame/components/component.dart';
 import 'package:flame/game/game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,10 +11,6 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
   Player player;
   Size screenSize;
   bool isInit = false;
-
-  void remove(Component component) {
-    components.remove(component);
-  }
 
   void _renderFPS(Canvas canvas) {
     TextUtil.drawText(

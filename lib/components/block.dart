@@ -11,6 +11,9 @@ abstract class Block extends Component {
   Paint paint = Palette.white.paint;
   BlueBoxGame game;
 
+  bool _shouldDestroy = false;
+  bool destroy() => _shouldDestroy;
+
   Block(this.game, this.size) {
     x = Random().nextDouble() * (game.screenSize.width - size);
     y = -size;
@@ -35,7 +38,7 @@ abstract class Block extends Component {
 
   void _checkAlive() {
     if (y >= game.screenSize.height) {
-      game.remove(this);
+      _shouldDestroy = true;
     }
   }
 
@@ -45,6 +48,7 @@ abstract class Block extends Component {
 
     if (blockRect.overlaps(playerRect)) {
       onPlayerColision();
+      _shouldDestroy = true;
     }
   }
 
