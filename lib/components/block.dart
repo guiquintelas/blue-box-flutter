@@ -3,19 +3,22 @@ import 'dart:ui';
 
 import 'package:blue_box_flutter/blue_box_game.dart';
 import 'package:flame/components/component.dart';
+import 'package:flame/components/mixins/has_game_ref.dart';
 
 import '../palette.dart';
 
-abstract class Block extends Component {
+abstract class Block extends Component with HasGameRef<BlueBoxGame> {
   double x, y, size, speed;
   Paint paint = Palette.white.paint;
-  BlueBoxGame game;
 
   bool _shouldDestroy = false;
   bool destroy() => _shouldDestroy;
 
-  Block(this.game, this.size) {
-    x = Random().nextDouble() * (game.screenSize.width - size);
+  Block(this.size);
+
+  @override
+  void onMount() {
+    x = Random().nextDouble() * (gameRef.size.width - size);
     y = -size;
     speed = 2 + Random().nextDouble() * 5;
   }
@@ -37,14 +40,14 @@ abstract class Block extends Component {
   }
 
   void _checkAlive() {
-    if (y >= game.screenSize.height) {
+    if (y >= gameRef.size.height) {
       _shouldDestroy = true;
     }
   }
 
   void _checkForPlayerColision() {
     Rect blockRect = Rect.fromLTWH(x, y, size, size);
-    Rect playerRect = game.player.toRect();
+    Rect playerRect = gameRef.player.toRect();
 
     if (blockRect.overlaps(playerRect)) {
       onPlayerColision();

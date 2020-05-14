@@ -16,13 +16,13 @@ class BlueBoxGame extends MyBaseGame {
 
   void addEnemyBlock() {
     if (componentCount<EnemyBlock>() < 10) {
-      add(EnemyBlock(this));
+      add(EnemyBlock());
     }
   }
 
   void addLifeBlock() {
     if (componentCount<LifeBlock>() < 2) {
-      add(LifeBlock(this));
+      add(LifeBlock());
     }
   }
 

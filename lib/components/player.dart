@@ -8,8 +8,6 @@ import 'package:flame/gestures.dart';
 import 'package:flutter/gestures.dart';
 
 class Player extends Component with PanDetector, HasGameRef<BlueBoxGame> {
-  Size screenSize;
-
   double x, y, size = 30;
   int life = 1;
 
@@ -21,11 +19,10 @@ class Player extends Component with PanDetector, HasGameRef<BlueBoxGame> {
   @override
   void update(double t) {}
 
-  void resize(Size size) {
-    super.resize(size);
-    screenSize = size;
-    x = screenSize.bottomCenter(Offset.zero).dx;
-    y = screenSize.bottomCenter(Offset(0, -150)).dy;
+  @override
+  void onMount() {
+    x = gameRef.size.bottomCenter(Offset.zero).dx;
+    y = gameRef.size.bottomCenter(Offset(0, -150)).dy;
   }
 
   @override
