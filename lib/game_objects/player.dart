@@ -1,15 +1,15 @@
 import 'dart:ui';
 
 import 'package:blue_box_flutter/blue_box_game.dart';
+import 'package:blue_box_flutter/helpers/palette.dart';
 import 'package:flame/components/component.dart';
-import 'package:blue_box_flutter/palette.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/gestures.dart';
 
 class Player extends Component with PanDetector, HasGameRef<BlueBoxGame> {
   double x, y, size = 30;
-  int life = 1;
+  int life = 35;
 
   @override
   void render(Canvas c) {

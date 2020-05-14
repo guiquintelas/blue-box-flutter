@@ -1,6 +1,6 @@
-import 'package:blue_box_flutter/components/block.dart';
+import 'package:blue_box_flutter/helpers/palette.dart';
 
-import '../palette.dart';
+import 'block.dart';
 
 class LifeBlock extends Block {
   LifeBlock() : super(23) {
