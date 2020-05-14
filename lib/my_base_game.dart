@@ -4,8 +4,8 @@ import 'package:flame/game/game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'components/player.dart';
-import 'components/text_util.dart';
+import 'game_objects/player.dart';
+import 'helpers/text_util.dart';
 
 abstract class MyBaseGame extends BaseGame with PanDetector {
   Player player;

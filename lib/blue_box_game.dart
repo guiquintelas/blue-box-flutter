@@ -5,7 +5,10 @@ import 'package:blue_box_flutter/components/life_block.dart';
 import 'package:blue_box_flutter/components/text_util.dart';
 import 'package:blue_box_flutter/my_base_game.dart';
 
-import 'components/player.dart';
+import 'game_objects/enemy_block.dart';
+import 'game_objects/life_block.dart';
+import 'game_objects/player.dart';
+import 'helpers/text_util.dart';
 
 class BlueBoxGame extends MyBaseGame {
   bool debugMode() => true;

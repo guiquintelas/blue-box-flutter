@@ -2,10 +2,9 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:blue_box_flutter/blue_box_game.dart';
+import 'package:blue_box_flutter/helpers/palette.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
-
-import '../palette.dart';
 
 abstract class Block extends Component with HasGameRef<BlueBoxGame> {
   double x, y, size, speed;
