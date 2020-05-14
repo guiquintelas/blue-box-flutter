@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flame/components/component.dart';
 import 'package:flame/game/game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,10 +11,6 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
   Player player;
   Size screenSize;
   bool isInit = false;
-
-  void remove(Component component) {
-    components.remove(component);
-  }
 
   void _renderFPS(Canvas canvas) {
     TextUtil.drawText(
@@ -47,7 +42,6 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     if (!isInit) return;
 
     super.onPanUpdate(details);
-    this.player.onPanUpdate(details);
 
     for (var component in this.components) {
       if (component is PanDetector) {
@@ -58,6 +52,10 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
 
   void init() {
     add(player = Player());
+  }
+
+  void dispose() {
+    components.clear();
   }
 
   @override
@@ -79,6 +77,7 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     }
   }
 
+  void restart() {}
   void updateGame(double t);
   void renderGame(Canvas canvas);
 }

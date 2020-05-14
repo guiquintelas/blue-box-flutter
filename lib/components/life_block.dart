@@ -11,6 +11,5 @@ class LifeBlock extends Block {
   @override
   void onPlayerColision() {
     game.player.life++;
-    game.remove(this);
   }
 }
