@@ -11,6 +11,10 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
   Player player;
   bool isInit = false;
 
+  double timePlayed;
+  double screenHeightRatio;
+  double screenWidthRatio;
+
   @override
   void onPanUpdate(DragUpdateDetails details) {
     super.onPanUpdate(details);
@@ -29,6 +33,8 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
 
     if (beforeSize == null && this.size != null) {
       isInit = true;
+      screenHeightRatio = size.height / 868.0;
+      screenWidthRatio = size.width / 411.0;
       this.init();
     }
   }
@@ -46,6 +52,7 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
   void update(double t) {
     if (!isInit) return;
 
+    timePlayed += t;
     updateGame(t);
     super.update(t);
   }
@@ -67,7 +74,10 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
         canvas, "FPS: ${fps().toStringAsFixed(0)}", Offset(10, 0));
   }
 
-  void init() {}
+  void init() {
+    timePlayed = 0;
+  }
+
   void updateGame(double t);
   void renderGame(Canvas canvas);
 

@@ -20,7 +20,8 @@ abstract class Block extends Component with HasGameRef<BlueBoxGame> {
     size = gameRef.size.width / scale;
     x = Random().nextDouble() * (gameRef.size.width - size);
     y = -size;
-    speed = 2 + Random().nextDouble() * 5;
+
+    speed = minSpeed() + Random().nextDouble() * maxSpeed();
   }
 
   @override
@@ -29,14 +30,14 @@ abstract class Block extends Component with HasGameRef<BlueBoxGame> {
   }
 
   @override
-  void update(double t) {
-    _fall();
+  void update(double dt) {
+    _fall(dt);
     _checkAlive();
     _checkForPlayerColision();
   }
 
-  void _fall() {
-    y += speed;
+  void _fall(double dt) {
+    y += speed * dt * gameRef.screenWidthRatio;
   }
 
   void _checkAlive() {
@@ -54,6 +55,10 @@ abstract class Block extends Component with HasGameRef<BlueBoxGame> {
       _shouldDestroy = true;
     }
   }
+
+  double minSpeed() => 100 + gameRef.timePlayed.clamp(0.0, 60 * 7.0) * 2;
+  double maxSpeed() => 200;
+  static double createRate() => 1;
 
   void onPlayerColision();
 }

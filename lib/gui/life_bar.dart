@@ -7,9 +7,23 @@ import 'package:flame/components/mixins/has_game_ref.dart';
 import '../blue_box_game.dart';
 
 class LifeBar extends Component with HasGameRef<BlueBoxGame> {
-  static const double LIFE_SIZE = 11;
-  static const double LIFE_SPACING = 7;
-  static const double BOTTOM_PADDING = 80;
+  static double lifeSize;
+  static double lifeSpacing;
+  static double bottomPadding = 80;
+  static double topPadding;
+
+  static int maxColumnLifeCount;
+
+  @override
+  void onMount() {
+    lifeSize = 11 * gameRef.screenWidthRatio;
+    lifeSpacing = 7 * gameRef.screenWidthRatio;
+    topPadding = lifeSize;
+
+    maxColumnLifeCount = ((gameRef.size.height - bottomPadding - topPadding) /
+            (lifeSize + lifeSpacing))
+        .ceil();
+  }
 
   @override
   void render(Canvas c) {
@@ -23,29 +37,22 @@ class LifeBar extends Component with HasGameRef<BlueBoxGame> {
 
   void _drawLife(Canvas c, int index) {
     c.drawRect(
-        Rect.fromLTWH(getLifeX(index), getLifeY(index), LIFE_SIZE, LIFE_SIZE),
+        Rect.fromLTWH(getLifeX(index), getLifeY(index), lifeSize, lifeSize),
         Palette.green.paint);
   }
 
-  int _getMaxColumnLife() {
-    return ((gameRef.size.height - BOTTOM_PADDING) / (LIFE_SIZE + LIFE_SPACING))
-        .ceil();
-  }
-
   int _getLifeColmun(int index) {
-    return ((index * (LIFE_SIZE + LIFE_SPACING)) /
-            (gameRef.size.height - BOTTOM_PADDING))
-        .floor();
+    return (index / maxColumnLifeCount).floor();
   }
 
   double getLifeX(int index) {
-    return _getLifeColmun(index) * (LIFE_SPACING + LIFE_SIZE) + LIFE_SPACING;
+    return _getLifeColmun(index) * (lifeSpacing + lifeSize) + lifeSpacing;
   }
 
   double getLifeY(int index) {
     return gameRef.size.height -
-        BOTTOM_PADDING -
-        ((index % _getMaxColumnLife()) * (LIFE_SIZE + LIFE_SPACING));
+        bottomPadding -
+        ((index % maxColumnLifeCount) * (lifeSize + lifeSpacing));
   }
 
   @override
