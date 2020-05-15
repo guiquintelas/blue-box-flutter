@@ -36,9 +36,7 @@ class BlueBoxGame extends MyBaseGame {
   }
 
   @override
-  void renderGame(Canvas canvas) {
-    TextUtil.drawText(canvas, "Life: ${player.life}", Offset(100, 10));
-  }
+  void renderGame(Canvas canvas) {}
 
   @override
   void restart() {
