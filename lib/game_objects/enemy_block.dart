@@ -1,7 +1,7 @@
 import 'block.dart';
 
 class EnemyBlock extends Block {
-  EnemyBlock() : super(20);
+  EnemyBlock() : super(24.6);
 
   @override
   void onPlayerColision() {

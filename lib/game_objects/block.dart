@@ -7,16 +7,17 @@ import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 
 abstract class Block extends Component with HasGameRef<BlueBoxGame> {
-  double x, y, size, speed;
+  double x, y, size, speed, scale;
   Paint paint = Palette.white.paint;
 
   bool _shouldDestroy = false;
   bool destroy() => _shouldDestroy;
 
-  Block(this.size);
+  Block(this.scale);
 
   @override
   void onMount() {
+    size = gameRef.size.width / scale;
     x = Random().nextDouble() * (gameRef.size.width - size);
     y = -size;
     speed = 2 + Random().nextDouble() * 5;

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class TextUtil {
   static TextStyle defaultTextStyle =
-      TextStyle(color: Colors.white, fontSize: 25, fontFamily: 'UnitedKingdom');
+      TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'UnitedKingdom');
 
   static drawText(Canvas canvas, String text, Offset offset) {
     final textSpan = TextSpan(

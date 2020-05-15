@@ -9,7 +9,7 @@ import '../blue_box_game.dart';
 class LifeBar extends Component with HasGameRef<BlueBoxGame> {
   static const double LIFE_SIZE = 11;
   static const double LIFE_SPACING = 7;
-  static const double BOTTOM_PADDING = 50;
+  static const double BOTTOM_PADDING = 80;
 
   @override
   void render(Canvas c) {

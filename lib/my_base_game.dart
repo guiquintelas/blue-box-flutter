@@ -64,7 +64,7 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
 
   void _renderFPS(Canvas canvas) {
     TextUtil.drawText(
-        canvas, "FPS: ${fps().toStringAsFixed(0)}", Offset(10, 10));
+        canvas, "FPS: ${fps().toStringAsFixed(0)}", Offset(10, 0));
   }
 
   void init() {}
