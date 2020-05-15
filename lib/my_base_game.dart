@@ -64,6 +64,8 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     super.render(canvas);
     renderGame(canvas);
 
+    _renderTime(canvas);
+
     if (debugMode()) {
       _renderFPS(canvas);
     }
@@ -71,7 +73,17 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
 
   void _renderFPS(Canvas canvas) {
     TextUtil.drawText(
-        canvas, "FPS: ${fps().toStringAsFixed(0)}", Offset(10, 0));
+        canvas, "FPS: ${fps().toStringAsFixed(0)}", Offset(10, 30));
+  }
+
+  void _renderTime(Canvas canvas) {
+    int minutes = (timePlayed / 60).floor();
+    int seconds = (timePlayed % 60).floor();
+
+    String minuteStr = minutes > 9 ? "$minutes" : "0$minutes";
+    String secondStr = seconds > 9 ? "$seconds" : "0$seconds";
+
+    TextUtil.drawText(canvas, "TIME: $minuteStr:$secondStr", Offset(10, 0));
   }
 
   void init() {
