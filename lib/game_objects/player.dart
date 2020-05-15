@@ -23,7 +23,7 @@ class Player extends Component with PanDetector, HasGameRef<BlueBoxGame> {
   void onMount() {
     var yOffset = -30 - gameRef.screenHeightRatio * 150;
 
-    x = gameRef.size.bottomCenter(Offset.zero).dx;
+    x = gameRef.size.bottomCenter(Offset.zero).dx - size() / 2;
     y = gameRef.size.bottomCenter(Offset(0, yOffset)).dy;
   }
 
