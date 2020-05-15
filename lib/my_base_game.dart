@@ -11,6 +11,7 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
   Player player;
   bool isInit = false;
 
+  double timePlayed;
   double screenHeightRatio;
   double screenWidthRatio;
 
@@ -51,6 +52,7 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
   void update(double t) {
     if (!isInit) return;
 
+    timePlayed += t;
     updateGame(t);
     super.update(t);
   }
@@ -72,7 +74,10 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
         canvas, "FPS: ${fps().toStringAsFixed(0)}", Offset(10, 0));
   }
 
-  void init() {}
+  void init() {
+    timePlayed = 0;
+  }
+
   void updateGame(double t);
   void renderGame(Canvas canvas);
 
