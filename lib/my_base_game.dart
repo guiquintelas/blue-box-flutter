@@ -11,6 +11,9 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
   Player player;
   bool isInit = false;
 
+  double screenHeightRatio;
+  double screenWidthRatio;
+
   @override
   void onPanUpdate(DragUpdateDetails details) {
     super.onPanUpdate(details);
@@ -29,6 +32,8 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
 
     if (beforeSize == null && this.size != null) {
       isInit = true;
+      screenHeightRatio = size.height / 868.0;
+      screenWidthRatio = size.width / 411.0;
       this.init();
     }
   }
