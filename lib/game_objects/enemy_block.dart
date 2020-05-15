@@ -10,5 +10,5 @@ class EnemyBlock extends Block {
     gameRef.player.life--;
   }
 
-  static double createRate(double timePlayed) => timePlayed / 400.0;
+  static double createRate(double timePlayed) => .02 + timePlayed / 400.0;
 }
