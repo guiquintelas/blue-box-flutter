@@ -4,10 +4,9 @@ import 'package:blue_box_flutter/blue_box_game.dart';
 import 'package:blue_box_flutter/helpers/palette.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
-import 'package:flame/gestures.dart';
 import 'package:flutter/gestures.dart';
 
-class Player extends Component with PanDetector, HasGameRef<BlueBoxGame> {
+class Player extends Component with HasGameRef<BlueBoxGame> {
   double x, y;
   int life = 1;
 
@@ -27,10 +26,8 @@ class Player extends Component with PanDetector, HasGameRef<BlueBoxGame> {
     y = gameRef.size.bottomCenter(Offset(0, yOffset)).dy;
   }
 
-  @override
-  void onPanUpdate(DragUpdateDetails details) {
-    super.onPanUpdate(details);
-    x = details.globalPosition.dx - size() / 2;
+  void handlePan(double panX) {
+    x = panX - size() / 2;
   }
 
   Rect toRect() {

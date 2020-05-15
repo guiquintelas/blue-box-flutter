@@ -9,22 +9,12 @@ import 'helpers/text_util.dart';
 
 abstract class MyBaseGame extends BaseGame with PanDetector {
   Player player;
-  bool isInit = false;
+  bool initialized = false;
+  bool paused = true;
 
   double timePlayed;
   double screenHeightRatio;
   double screenWidthRatio;
-
-  @override
-  void onPanUpdate(DragUpdateDetails details) {
-    super.onPanUpdate(details);
-
-    for (var component in this.components) {
-      if (component is PanDetector) {
-        (component as PanDetector).onPanUpdate(details);
-      }
-    }
-  }
 
   @override
   void resize(Size size) {
@@ -32,7 +22,7 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     super.resize(size);
 
     if (beforeSize == null && this.size != null) {
-      isInit = true;
+      initialized = true;
       screenHeightRatio = size.height / 868.0;
       screenWidthRatio = size.width / 411.0;
       this.init();
@@ -50,7 +40,7 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
 
   @override
   void update(double t) {
-    if (!isInit) return;
+    if (!initialized || paused) return;
 
     timePlayed += t;
     updateGame(t);
@@ -59,7 +49,7 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
 
   @override
   void render(Canvas canvas) {
-    if (!isInit) return;
+    if (!initialized) return;
 
     super.render(canvas);
     renderGame(canvas);
@@ -91,5 +81,29 @@ abstract class MyBaseGame extends BaseGame with PanDetector {
     });
 
     return count;
+  }
+
+  @override
+  void onPanDown(DragDownDetails details) {
+    if (!initialized) return;
+    player.handlePan(details.globalPosition.dx);
+    paused = false;
+  }
+
+  @override
+  void onPanUpdate(DragUpdateDetails details) {
+    if (!initialized) return;
+    player.handlePan(details.globalPosition.dx);
+    paused = false;
+  }
+
+  @override
+  void onPanEnd(DragEndDetails details) {
+    paused = true;
+  }
+
+  @override
+  void onPanCancel() {
+    paused = true;
   }
 }
